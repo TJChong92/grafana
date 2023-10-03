@@ -1,7 +1,7 @@
 import { PanelBuilders, SceneFlexItem, SceneQueryRunner, SceneTimeRange } from '@grafana/scenes';
 import { DataSourceRef, GraphDrawStyle, TooltipDisplayMode } from '@grafana/schema';
 
-import { PANEL_STYLES } from '../../home/Insights';
+import { getPanelMenu, PANEL_STYLES } from '../../home/Insights';
 
 export function getGrafanaRulesByEvaluationScene(
   timeRange: SceneTimeRange,
@@ -35,6 +35,7 @@ export function getGrafanaRulesByEvaluationScene(
           fixedColor: 'blue',
         })
       )
+      .setMenu(getPanelMenu(panelTitle))
       .build(),
   });
 }

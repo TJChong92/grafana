@@ -1,7 +1,7 @@
 import { PanelBuilders, SceneFlexItem, SceneQueryRunner, SceneTimeRange } from '@grafana/scenes';
 import { DataSourceRef, GraphDrawStyle, TooltipDisplayMode } from '@grafana/schema';
 
-import { PANEL_STYLES } from '../../../home/Insights';
+import { getPanelMenu, PANEL_STYLES } from '../../../home/Insights';
 
 export function getInstancesByStateScene(timeRange: SceneTimeRange, datasource: DataSourceRef, panelTitle: string) {
   const query = new SceneQueryRunner({
@@ -31,6 +31,7 @@ export function getInstancesByStateScene(timeRange: SceneTimeRange, datasource: 
           fixedColor: 'red',
         })
       )
+      .setMenu(getPanelMenu(panelTitle))
       .build(),
   });
 }

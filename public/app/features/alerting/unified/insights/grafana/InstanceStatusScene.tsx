@@ -1,6 +1,8 @@
 import { PanelBuilders, SceneFlexItem, SceneQueryRunner, SceneTimeRange } from '@grafana/scenes';
 import { DataSourceRef } from '@grafana/schema';
 
+import { getPanelMenu } from '../../home/Insights';
+
 const STATUS_COLORS = {
   alerting: 'red',
   pending: 'yellow',
@@ -40,6 +42,7 @@ export function getInstanceStatByStatusScene(
         })
       )
       .setNoValue('0')
+      .setMenu(getPanelMenu(panelTitle))
       .build(),
   });
 }

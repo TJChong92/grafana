@@ -1,7 +1,7 @@
 import { PanelBuilders, SceneFlexItem, SceneQueryRunner, SceneTimeRange } from '@grafana/scenes';
 import { DataSourceRef, GraphDrawStyle, TooltipDisplayMode } from '@grafana/schema';
 
-import { PANEL_STYLES } from '../../home/Insights';
+import { getPanelMenu, PANEL_STYLES } from '../../home/Insights';
 
 export function getGrafanaEvalSuccessVsFailuresScene(
   timeRange: SceneTimeRange,
@@ -48,6 +48,7 @@ export function getGrafanaEvalSuccessVsFailuresScene(
             fixedColor: 'red',
           })
       )
+      .setMenu(getPanelMenu(panelTitle))
       .build(),
   });
 }
