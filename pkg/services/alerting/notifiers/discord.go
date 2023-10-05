@@ -99,7 +99,7 @@ func (dn *DiscordNotifier) Notify(evalContext *alerting.EvalContext) error {
 
 	bodyJSON := simplejson.New()
 	if !dn.UseDiscordUsername {
-		bodyJSON.Set("username", "Grafana")
+		bodyJSON.Set("username", "S-Dash")
 	}
 
 	if dn.Content != "" {
@@ -124,7 +124,7 @@ func (dn *DiscordNotifier) Notify(evalContext *alerting.EvalContext) error {
 
 	footer := map[string]any{
 		"text":     "Grafana v" + setting.BuildVersion,
-		"icon_url": "https://grafana.com/static/assets/img/fav32.png",
+		"icon_url": "https://grafana.com/static/assets/img/sdash_fav32.png",
 	}
 
 	color, _ := strconv.ParseInt(strings.TrimLeft(evalContext.GetStateModel().Color, "#"), 16, 0)

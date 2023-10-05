@@ -34,7 +34,7 @@ const createStorybookTheme = (theme: GrafanaTheme2) => {
     inputTextColor: theme.components.input.text,
     inputBorderRadius: parseInt(theme.shape.borderRadius(1), 10),
 
-    brandTitle: 'Grafana UI',
+    brandtitle: 'S-dash UI',
     brandUrl: './',
     brandImage: `public/img/grafana_text_logo-${theme.colors.mode}.svg`,
   });

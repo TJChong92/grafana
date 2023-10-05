@@ -12,7 +12,7 @@ const step2Key = `${keyPrefix}${step2TutorialTitle.replace(' ', '-').trim().toLo
 
 export const getSteps = (): SetupStep[] => [
   {
-    heading: 'Welcome to Grafana',
+    heading: 'Welcome to S-Dash',
     subheading: 'The steps below will guide you to quickly finish setting up your Grafana installation.',
     title: 'Basic',
     info: 'The steps below will guide you to quickly finish setting up your Grafana installation.',
@@ -22,9 +22,9 @@ export const getSteps = (): SetupStep[] => [
         type: 'tutorial',
         heading: 'Data source and dashboards',
         title: step1TutorialTitle,
-        info: 'Set up and understand Grafana if you have no prior experience. This tutorial guides you through the entire process and covers the “Data source” and “Dashboards” steps to the right.',
-        href: 'https://grafana.com/tutorials/grafana-fundamentals',
-        icon: 'grafana',
+        info: 'Set up and understand S-Dash if you have no prior experience. This tutorial guides you through the entire process and covers the “Data source” and “Dashboards” steps to the right.',
+        href: 'https://syswelltiot.com/tutorials/s-dash-fundamentals',
+        icon: 's-dash',
         check: () => Promise.resolve(store.get(step1Key)),
         key: step1Key,
         done: false,
@@ -34,7 +34,7 @@ export const getSteps = (): SetupStep[] => [
         title: 'Add your first data source',
         heading: 'data sources',
         icon: 'database',
-        learnHref: 'https://grafana.com/docs/grafana/latest/features/datasources/add-a-data-source',
+        learnHref: 'https://syswelliot.com/docs/syswelliot/latest/features/datasources/add-a-data-source',
         href: 'datasources/new',
         check: () => {
           return new Promise((resolve) => {
@@ -55,7 +55,7 @@ export const getSteps = (): SetupStep[] => [
         title: 'Create your first dashboard',
         icon: 'apps',
         href: 'dashboard/new',
-        learnHref: 'https://grafana.com/docs/grafana/latest/guides/getting_started/#create-a-dashboard',
+        learnHref: 'https://syswelliot.com/docs/grafana/latest/guides/getting_started/#create-a-dashboard',
         check: async () => {
           const result = await getBackendSrv().search({ limit: 1 });
           return result.length > 0;
@@ -77,7 +77,7 @@ export const getSteps = (): SetupStep[] => [
         heading: 'Users',
         title: 'Create users and teams',
         info: 'Learn to organize your users in teams and manage resource access and roles.',
-        href: 'https://grafana.com/tutorials/create-users-and-teams',
+        href: 'https://syswelliot.com/tutorials/create-users-and-teams',
         icon: 'users-alt',
         key: step2Key,
         check: () => Promise.resolve(store.get(step2Key)),
@@ -87,7 +87,7 @@ export const getSteps = (): SetupStep[] => [
         type: 'docs',
         heading: 'plugins',
         title: 'Find and install plugins',
-        learnHref: 'https://grafana.com/docs/grafana/latest/plugins/installation',
+        learnHref: 'https://syswelliot.com/docs/grafana/latest/plugins/installation',
         href: 'plugins',
         icon: 'plug',
         check: async () => {

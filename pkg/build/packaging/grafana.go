@@ -350,7 +350,7 @@ func createPackage(srcDir string, options linuxPackageOptions) error {
 }
 func executeFPM(options linuxPackageOptions, packageRoot, srcDir string) error {
 	name := "grafana"
-	vendor := "Grafana"
+	vendor := "S-Dash"
 	if options.edition == config.EditionEnterprise || options.edition == config.EditionEnterprise2 {
 		vendor += " Enterprise"
 		if options.edition == config.EditionEnterprise2 {
@@ -367,7 +367,7 @@ func executeFPM(options linuxPackageOptions, packageRoot, srcDir string) error {
 	pkgVersion := packageVersion(options)
 	args := []string{
 		"-s", "dir",
-		"--description", "Grafana",
+		"--description", "S-Dash",
 		"-C", packageRoot,
 		"--url", "https://grafana.com",
 		"--maintainer", "contact@grafana.com",
