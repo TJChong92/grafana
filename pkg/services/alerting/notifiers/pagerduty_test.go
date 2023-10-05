@@ -152,7 +152,7 @@ func TestPagerdutyNotifier(t *testing.T) {
 		require.Nil(t, err)
 
 		diff := cmp.Diff(map[string]any{
-			"client":       "Grafana",
+			"client":       "S-Dash",
 			"client_url":   "",
 			"dedup_key":    "alertId-0",
 			"event_action": "trigger",
@@ -162,7 +162,7 @@ func TestPagerdutyNotifier(t *testing.T) {
 				},
 			},
 			"payload": map[string]any{
-				"component": "Grafana",
+				"component": "S-Dash",
 				"source":    "<<PRESENCE>>",
 				"custom_details": map[string]any{
 					"state": "alerting",
@@ -208,7 +208,7 @@ func TestPagerdutyNotifier(t *testing.T) {
 		require.Nil(t, err)
 
 		diff := cmp.Diff(map[string]any{
-			"client":       "Grafana",
+			"client":       "S-Dash",
 			"client_url":   "",
 			"dedup_key":    "alertId-0",
 			"event_action": "trigger",
@@ -218,7 +218,7 @@ func TestPagerdutyNotifier(t *testing.T) {
 				},
 			},
 			"payload": map[string]any{
-				"component": "Grafana",
+				"component": "S-Dash",
 				"source":    "<<PRESENCE>>",
 				"custom_details": map[string]any{
 					"state": "alerting",
@@ -275,7 +275,7 @@ func TestPagerdutyNotifier(t *testing.T) {
 		require.NoError(t, err)
 
 		diff := cmp.Diff(map[string]any{
-			"client":       "Grafana",
+			"client":       "S-Dash",
 			"client_url":   "",
 			"dedup_key":    "alertId-0",
 			"event_action": "trigger",
@@ -285,7 +285,7 @@ func TestPagerdutyNotifier(t *testing.T) {
 				},
 			},
 			"payload": map[string]any{
-				"component": "Grafana",
+				"component": "S-Dash",
 				"source":    "<<PRESENCE>>",
 				"custom_details": map[string]any{
 					"message": "someMessage",
@@ -346,7 +346,7 @@ func TestPagerdutyNotifier(t *testing.T) {
 		require.NoError(t, err)
 
 		diff := cmp.Diff(map[string]any{
-			"client":       "Grafana",
+			"client":       "S-Dash",
 			"client_url":   "",
 			"dedup_key":    "key-" + strings.Repeat("x", 250),
 			"event_action": "trigger",
@@ -425,7 +425,7 @@ func TestPagerdutyNotifier(t *testing.T) {
 		require.NoError(t, err)
 
 		diff := cmp.Diff(map[string]any{
-			"client":       "Grafana",
+			"client":       "S-Dash",
 			"client_url":   "",
 			"dedup_key":    "alertId-0",
 			"event_action": "trigger",
@@ -504,7 +504,7 @@ func TestPagerdutyNotifier(t *testing.T) {
 		require.NoError(t, err)
 
 		diff := cmp.Diff(map[string]any{
-			"client":       "Grafana",
+			"client":       "S-Dash",
 			"client_url":   "",
 			"dedup_key":    "alertId-0",
 			"event_action": "trigger",

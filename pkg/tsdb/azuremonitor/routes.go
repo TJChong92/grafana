@@ -17,37 +17,37 @@ const (
 var azManagement = types.AzRoute{
 	URL:     "https://management.azure.com",
 	Scopes:  []string{"https://management.azure.com/.default"},
-	Headers: map[string]string{"x-ms-app": "Grafana"},
+	Headers: map[string]string{"x-ms-app": "S-Dash"},
 }
 
 var azUSGovManagement = types.AzRoute{
 	URL:     "https://management.usgovcloudapi.net",
 	Scopes:  []string{"https://management.usgovcloudapi.net/.default"},
-	Headers: map[string]string{"x-ms-app": "Grafana"},
+	Headers: map[string]string{"x-ms-app": "S-Dash"},
 }
 
 var azChinaManagement = types.AzRoute{
 	URL:     "https://management.chinacloudapi.cn",
 	Scopes:  []string{"https://management.chinacloudapi.cn/.default"},
-	Headers: map[string]string{"x-ms-app": "Grafana"},
+	Headers: map[string]string{"x-ms-app": "S-Dash"},
 }
 
 var azLogAnalytics = types.AzRoute{
 	URL:     "https://api.loganalytics.io",
 	Scopes:  []string{"https://api.loganalytics.io/.default"},
-	Headers: map[string]string{"x-ms-app": "Grafana", "Cache-Control": "public, max-age=60"},
+	Headers: map[string]string{"x-ms-app": "S-Dash", "Cache-Control": "public, max-age=60"},
 }
 
 var azChinaLogAnalytics = types.AzRoute{
 	URL:     "https://api.loganalytics.azure.cn",
 	Scopes:  []string{"https://api.loganalytics.azure.cn/.default"},
-	Headers: map[string]string{"x-ms-app": "Grafana", "Cache-Control": "public, max-age=60"},
+	Headers: map[string]string{"x-ms-app": "S-Dash", "Cache-Control": "public, max-age=60"},
 }
 
 var azUSGovLogAnalytics = types.AzRoute{
 	URL:     "https://api.loganalytics.us",
 	Scopes:  []string{"https://api.loganalytics.us/.default"},
-	Headers: map[string]string{"x-ms-app": "Grafana", "Cache-Control": "public, max-age=60"},
+	Headers: map[string]string{"x-ms-app": "S-Dash", "Cache-Control": "public, max-age=60"},
 }
 
 var (

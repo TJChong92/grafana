@@ -110,7 +110,7 @@ export function getGrafanaScenes() {
 
 function getGrafanaAlertmanagerScenes() {
   return new NestedScene({
-    title: 'Grafana Alertmanager',
+    title: 'S-dash Alertmanager',
     canCollapse: true,
     isCollapsed: false,
     body: new SceneFlexLayout({

@@ -21,7 +21,7 @@ const rulesSource = {
     info: {
       author: {
         name: 'Grafana Labs',
-        url: 'https://grafana.com',
+        url: 'https://syswelliot.com,
       },
       description: 'Open source time series database & alerting',
       links: [

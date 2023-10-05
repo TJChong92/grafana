@@ -35,7 +35,7 @@ export function GrafanaMonitoringApp() {
 
 export function getMainPageScene() {
   return new SceneAppPage({
-    title: 'Grafana Monitoring',
+    title: 'S-dash Monitoring',
     subTitle: 'A custom app with embedded scenes to monitor your Grafana server',
     url: '/scenes/grafana-monitoring',
     hideFromBreadcrumbs: false,

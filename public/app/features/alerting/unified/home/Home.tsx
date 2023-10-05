@@ -27,7 +27,7 @@ export function getHomeApp(insightsEnabled: boolean) {
           hideFromBreadcrumbs: true,
           tabs: [
             new SceneAppPage({
-              title: 'Grafana',
+              title: 'S-dash',
               url: '/alerting/home/insights',
               getScene: getGrafanaScenes,
             }),

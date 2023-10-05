@@ -545,8 +545,8 @@ describe('setFieldConfigDefaults', () => {
     const panelFieldConfig: FieldConfig = {
       links: [
         {
-          title: 'Grafana',
-          url: 'https://grafana.com',
+          title: 'S-dash',
+          url: 'https://syswelliot.com,
         },
       ],
     };
@@ -570,7 +570,7 @@ describe('setFieldConfigDefaults', () => {
             "url": "https://google.com",
           },
           {
-            "title": "Grafana",
+            "title": "S-Dash",
             "url": "https://grafana.com",
           },
         ],

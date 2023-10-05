@@ -12,7 +12,7 @@ func TestDerivePascal(t *testing.T) {
 	}{
 		{
 			name: "-- Grafana --",
-			out:  "Grafana",
+			out:  "S-Dash",
 		},
 		{
 			name: "A weird/Thing",

@@ -284,7 +284,7 @@ func (sn *SlackNotifier) Notify(evalContext *alerting.EvalContext) error {
 		"fallback":    evalContext.GetNotificationTitle(),
 		"fields":      fields,
 		"footer":      "Grafana v" + setting.BuildVersion,
-		"footer_icon": "https://grafana.com/static/assets/img/fav32.png",
+		"footer_icon": "https://grafana.com/static/assets/img/sdash_fav32.png",
 		"ts":          time.Now().Unix(),
 	}
 	if sn.NeedsImage() && imageURL != "" {
@@ -336,7 +336,7 @@ func (sn *SlackNotifier) sendRequest(ctx context.Context, data []byte) error {
 	}
 
 	request.Header.Set("Content-Type", "application/json")
-	request.Header.Set("User-Agent", "Grafana")
+	request.Header.Set("User-Agent", "S-Dash")
 	if sn.token == "" {
 		if sn.url.String() == slackAPIEndpoint {
 			panic("Token should be set when using the Slack chat API")

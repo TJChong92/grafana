@@ -27,7 +27,7 @@ func SetupTestSecureSocksProxySettings(t *testing.T) *sdkproxy.ClientCfg {
 		SerialNumber: big.NewInt(2019),
 		Subject: pkix.Name{
 			Organization: []string{"Grafana Labs"},
-			CommonName:   "Grafana",
+			CommonName:   "S-Dash",
 		},
 		NotBefore:             time.Now(),
 		NotAfter:              time.Now().AddDate(10, 0, 0),
@@ -59,7 +59,7 @@ func SetupTestSecureSocksProxySettings(t *testing.T) *sdkproxy.ClientCfg {
 		SerialNumber: big.NewInt(2019),
 		Subject: pkix.Name{
 			Organization: []string{"Grafana Labs"},
-			CommonName:   "Grafana",
+			CommonName:   "S-Dash",
 		},
 		NotBefore:    time.Now(),
 		NotAfter:     time.Now().AddDate(10, 0, 0),
