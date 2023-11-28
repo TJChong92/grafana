@@ -24,7 +24,7 @@ export function EntityNotFound({ entity = 'Page' }: Props) {
           home
         </a>{' '}
         or seeking help on the{' '}
-        <a href="https://community.grafana.com" target="_blank" rel="noreferrer" className="external-link">
+        <a href="https://community.syswelliot.com" target="_blank" rel="noreferrer" className="external-link">
           community site.
         </a>
       </div>

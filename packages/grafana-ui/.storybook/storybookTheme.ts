@@ -36,7 +36,7 @@ const createStorybookTheme = (theme: GrafanaTheme2) => {
 
     brandtitle: 'S-dash UI',
     brandUrl: './',
-    brandImage: `public/img/grafana_text_logo-${theme.colors.mode}.svg`,
+    brandImage: `public/img/sdash_text_logo-${theme.colors.mode}.svg`,
   });
 };
 
