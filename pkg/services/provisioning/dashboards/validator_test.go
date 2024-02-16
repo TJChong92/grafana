@@ -96,15 +96,8 @@ func TestDuplicatesValidator(t *testing.T) {
 		_, folderUID, err := r.getOrCreateFolder(context.Background(), cfg, fakeService, folderName)
 		require.NoError(t, err)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-		identity := dashboardIdentity{folderUID: folderUID, title: "Grafana"}
-=======
-		identity := dashboardIdentity{folderID: folderID, title: "S-Dash"}
->>>>>>> d24d6812c8 (Sdash Changes Commit Initial)
-=======
-		identity := dashboardIdentity{folderID: folderID, title: "S-Dash"}
->>>>>>> b16d9cbacc43d6670ecc9ff6c518f4823644c4a4
+
+		identity := dashboardIdentity{folderUID: folderUID, title: "S-Dash"}
 
 		cfg1 := &config{
 			Name: "first", Type: "file", OrgID: 1, Folder: folderName,
@@ -205,17 +198,7 @@ func TestDuplicatesValidator(t *testing.T) {
 		require.NoError(t, err)
 		_, folderUID, err := r.getOrCreateFolder(context.Background(), cfg, fakeService, cfg1.Folder)
 		require.NoError(t, err)
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-		identity := dashboardIdentity{folderUID: folderUID, title: "Grafana"}
-=======
-		identity := dashboardIdentity{folderID: folderID, title: "S-Dash"}
->>>>>>> d24d6812c8 (Sdash Changes Commit Initial)
-=======
-		identity := dashboardIdentity{folderID: folderID, title: "S-Dash"}
->>>>>>> b16d9cbacc43d6670ecc9ff6c518f4823644c4a4
-
+		identity := dashboardIdentity{folderUID: folderUID, title: "S-Dash"}
 		require.Equal(t, uint8(2), duplicates[1].UIDs["Z-phNqGmz"].Sum)
 		uidUsageReaders := keysToSlice(duplicates[1].UIDs["Z-phNqGmz"].InvolvedReaders)
 		sort.Strings(uidUsageReaders)
