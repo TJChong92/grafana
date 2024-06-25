@@ -15,7 +15,7 @@
 
     <Media Id="1" Cabinet="product.cab" EmbedCab="yes"/>
 
-    <Icon Id="icon.ico" SourceFile="grafana_icon.ico"/>
+    <Icon Id="icon.ico" SourceFile="sdash_icon.ico"/>
 
     <WixVariable Id="WixUILicenseRtf" Value="{{config.license}}" />
     <WixVariable Id="WixUIBannerBmp" Value="grafana_top_banner_white.bmp" />
@@ -37,7 +37,7 @@
       </Directory>
     </Directory>
 
-    <Feature Id="DefaultFeature" Title="Grafana" Display="expand" ConfigurableDirectory="INSTALLDIR">
+    <Feature Id="DefaultFeature" Title="S-Dash" Display="expand" ConfigurableDirectory="INSTALLDIR">
       {% for feature in features %}
         <Feature Id="{{ feature.name }}Feature" Title="{{ feature.title }}" Level="1">
           {% for component_group in feature.component_groups %}

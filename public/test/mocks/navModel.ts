@@ -1275,7 +1275,7 @@ export const mockNavModel: NavIndex = {
   help: {
     id: 'help',
     text: 'Help',
-    subTitle: 'Grafana v8.5.0-pre (f1c4da095b)',
+    subtitle: 'S-dash v8.5.0-pre (f1c4da095b)',
     icon: 'question-circle',
     url: '#',
   },

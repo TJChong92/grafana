@@ -19,7 +19,7 @@ export function EntityNotFound({ entity = 'Page' }: Props) {
       <EmptyState message={`${entity} not found`} variant="not-found">
         We&apos;re looking but can&apos;t seem to find this {entity.toLowerCase()}. Try returning{' '}
         <TextLink href="/">home</TextLink> or seeking help on the{' '}
-        <TextLink href="https://community.grafana.com" external>
+        <TextLink href="https://community.syswelliot.com" external>
           community site.
         </TextLink>
       </EmptyState>

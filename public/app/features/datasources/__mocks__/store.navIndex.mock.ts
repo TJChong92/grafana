@@ -2376,7 +2376,7 @@ export const navIndex: NavIndex = {
   help: {
     id: 'help',
     text: 'Help',
-    subTitle: 'Grafana v9.0.0-pre (cd35366222)',
+    subtitle: 'S-dash v9.0.0-pre (cd35366222)',
     icon: 'question-circle',
     url: '#',
     sortWeight: -1000,

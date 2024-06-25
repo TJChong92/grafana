@@ -27,7 +27,7 @@ export function getHomeApp(insightsEnabled: boolean) {
           hideFromBreadcrumbs: true,
           tabs: [
             new SceneAppPage({
-              title: 'Insights',
+              title: 'S-Dash Insights',
               url: '/alerting/home/insights',
               getScene: getInsightsScenes,
             }),

@@ -30,7 +30,7 @@
     {
       "type": "grafana",
       "id": "grafana",
-      "name": "Grafana",
+      "name": "S-Dash",
       "version": "9.5.6"
     },
     {
