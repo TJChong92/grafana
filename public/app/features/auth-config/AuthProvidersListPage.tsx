@@ -1,4 +1,4 @@
-import React, { JSX, useEffect, useState } from 'react';
+import { JSX, useEffect, useState } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
 import { GrafanaEdition } from '@grafana/data/src/types/config';
@@ -51,6 +51,9 @@ export const AuthConfigPageUnconnected = ({
   const onProviderCardClick = (providerType: string, enabled: boolean) => {
     reportInteraction('authentication_ui_provider_clicked', { provider: providerType, enabled });
   };
+
+  // filter out saml from sso providers because it is already included in availableProviders
+  providers = providers.filter((p) => p.provider !== 'saml');
 
   const providerList = availableProviders.length
     ? [

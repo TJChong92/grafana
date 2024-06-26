@@ -1,5 +1,4 @@
 import { css } from '@emotion/css';
-import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { GrafanaTheme2 } from '@grafana/data';
@@ -185,6 +184,29 @@ export const triangleItem: CanvasElementItem = {
         },
       });
   },
+
+  customConnectionAnchors: [
+    // points along the left edge
+    { x: -1, y: -1 }, // bottom left
+    { x: -0.8, y: -0.6 },
+    { x: -0.6, y: -0.2 },
+    { x: -0.4, y: 0.2 },
+    { x: -0.2, y: 0.6 },
+    { x: 0, y: 1 }, // top
+
+    // points along the right edge
+    { x: 0.2, y: 0.6 },
+    { x: 0.4, y: 0.2 },
+    { x: 0.6, y: -0.2 },
+    { x: 0.8, y: -0.6 },
+    { x: 1, y: -1 }, // bottom right
+
+    // points along the bottom edge
+    { x: 0.6, y: -1 },
+    { x: 0.2, y: -1 },
+    { x: -0.2, y: -1 },
+    { x: -0.6, y: -1 },
+  ],
 };
 
 const getStyles = (theme: GrafanaTheme2, data: CanvasElementData | undefined) => {

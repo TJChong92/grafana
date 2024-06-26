@@ -705,7 +705,7 @@ Set the policy template that will be used when adding the `Content-Security-Poli
 
 ### angular_support_enabled
 
-This currently defaults to `true` but will default to `false` in a future release. When set to false the angular framework and support components will not be loaded. This means that
+This is set to false by default, meaning that the angular framework and support components will not be loaded. This means that
 all [plugins]({{< relref "../../developers/angular_deprecation/angular-plugins" >}}) and core features that depend on angular support will stop working.
 
 The core features that depend on angular are:
@@ -891,6 +891,12 @@ Default is `24h` (24 hours). The minimum supported duration is `15m` (15 minutes
 The duration in time a verification email, used to update the email address of a user, remains valid before expiring.
 This setting should be expressed as a duration. Examples: 6h (hours), 2d (days), 1w (week).
 Default is 1h (1 hour).
+
+### last_seen_update_interval
+
+The frequency of updating a user's last seen time.
+This setting should be expressed as a duration. Examples: 1h (hour), 15m (minutes)
+Default is `15m` (15 minutes). The minimum supported duration is `5m` (5 minutes). The maximum supported duration is `1h` (1 hour).
 
 ### hidden_users
 
@@ -1174,6 +1180,28 @@ Azure cloud environment where Grafana is hosted:
 | Microsoft Chinese national cloud                 | AzureChinaCloud        |
 | US Government cloud                              | AzureUSGovernment      |
 | Microsoft German national cloud ("Black Forest") | AzureGermanCloud       |
+
+### clouds_config
+
+The JSON config defines a list of Azure clouds and their associated properties when hosted in custom Azure environments.
+
+For example:
+
+```ini
+clouds_config = `[
+		{
+			"name":"CustomCloud1",
+			"displayName":"Custom Cloud 1",
+			"aadAuthority":"https://login.cloud1.contoso.com/",
+			"properties":{
+				"azureDataExplorerSuffix": ".kusto.windows.cloud1.contoso.com",
+				"logAnalytics":            "https://api.loganalytics.cloud1.contoso.com",
+				"portal":                  "https://portal.azure.cloud1.contoso.com",
+				"prometheusResourceId":    "https://prometheus.monitor.azure.cloud1.contoso.com",
+				"resourceManager":         "https://management.azure.cloud1.contoso.com"
+			}
+		}]`
+```
 
 ### managed_identity_enabled
 
@@ -1613,6 +1641,12 @@ across cluster more quickly at the expense of increased bandwidth usage. The def
 
 The interval string is a possibly signed sequence of decimal numbers, followed by a unit suffix (ms, s, m, h, d), e.g. 30s or 1m.
 
+### ha_reconnect_timeout
+
+Length of time to attempt to reconnect to a lost peer. When running Grafana in a Kubernetes cluster, set this duration to less than `15m`.
+
+The string is a possibly signed sequence of decimal numbers followed by a unit suffix (ms, s, m, h, d), such as `30s` or `1m`.
+
 ### ha_push_pull_interval
 
 The interval between gossip full state syncs. Setting this interval lower (more frequent) will increase convergence speeds
@@ -1776,6 +1810,16 @@ Configures Query history in Explore.
 ### enabled
 
 Enable or disable the Query history. Default is `enabled`.
+
+<hr>
+
+## [short_links]
+
+Configures settings around the short link feature.
+
+### expire_time
+
+Short links which are never accessed are considered expired or stale, and will be deleted as cleanup. Set the expiration time in days. Default is `7` days. Maximum is `365` days, and setting above the maximum will have `365` set instead. Setting `0` means the short links will be cleaned up approximately every 10 minutes.
 
 <hr>
 

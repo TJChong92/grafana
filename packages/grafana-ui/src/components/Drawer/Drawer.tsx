@@ -3,7 +3,8 @@ import { useDialog } from '@react-aria/dialog';
 import { FocusScope } from '@react-aria/focus';
 import { useOverlay } from '@react-aria/overlays';
 import RcDrawer from 'rc-drawer';
-import React, { ReactNode, useCallback, useEffect, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
+import * as React from 'react';
 
 import { GrafanaTheme2 } from '@grafana/data';
 import { selectors } from '@grafana/e2e-selectors';
@@ -14,6 +15,8 @@ import { CustomScrollbar } from '../CustomScrollbar/CustomScrollbar';
 import { getDragStyles } from '../DragHandle/DragHandle';
 import { IconButton } from '../IconButton/IconButton';
 import { Text } from '../Text/Text';
+
+import 'rc-drawer/assets/index.css';
 
 export interface Props {
   children: ReactNode;
@@ -256,7 +259,7 @@ const getStyles = (theme: GrafanaTheme2) => {
     drawerContent: css({
       backgroundColor: `${theme.colors.background.primary} !important`,
       display: 'flex',
-      overflow: 'unset',
+      overflow: 'unset !important',
       flexDirection: 'column',
     }),
     drawerMotion: css({

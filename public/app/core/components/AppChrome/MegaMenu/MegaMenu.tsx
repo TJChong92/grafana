@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 import { DOMAttributes } from '@react-types/shared';
-import React, { forwardRef } from 'react';
+import { memo, forwardRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { GrafanaTheme2 } from '@grafana/data';
@@ -19,7 +19,7 @@ export interface Props extends DOMAttributes {
   onClose: () => void;
 }
 
-export const MegaMenu = React.memo(
+export const MegaMenu = memo(
   forwardRef<HTMLDivElement, Props>(({ onClose, ...restProps }, ref) => {
     const navTree = useSelector((state) => state.navBarTree);
     const styles = useStyles2(getStyles);
@@ -32,7 +32,7 @@ export const MegaMenu = React.memo(
       .filter((item) => item.id !== 'profile' && item.id !== 'help')
       .map((item) => enrichWithInteractionTracking(item, state.megaMenuDocked));
 
-    const activeItem = getActiveItem(navItems, location.pathname);
+    const activeItem = getActiveItem(navItems, state.sectionNav.node, location.pathname);
 
     const handleDockedMenu = () => {
       chrome.setMegaMenuDocked(!state.megaMenuDocked);
