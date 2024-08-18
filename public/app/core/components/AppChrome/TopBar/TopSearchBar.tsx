@@ -56,8 +56,8 @@ export const TopSearchBar = memo(function TopSearchBar() {
           <Dropdown overlay={() => <TopNavBarMenu node={enrichedHelpNode} />} placement="bottom-end">
             <ToolbarButton iconOnly icon="question-circle" aria-label="Help" />
           </Dropdown>
-        )}
-        {config.newsFeedEnabled && <NewsContainer />}
+         )&& false}
+        {config.newsFeedEnabled && <NewsContainer /> && false}
         {!contextSrv.user.isSignedIn && <SignInLink />}
         {profileNode && (
           <Dropdown overlay={() => <TopNavBarMenu node={profileNode} />} placement="bottom-end">

@@ -105,7 +105,7 @@ export const Footer = memo(({ customLinks, hideEdition }: Props) => {
 
   return (
     <footer className={styles.footer}>
-      <div className="text-center">
+      {/* <div className="text-center">
         <ul className={styles.list}>
           {links.map((link, index) => (
             <li className={styles.listItem} key={index}>
@@ -113,7 +113,7 @@ export const Footer = memo(({ customLinks, hideEdition }: Props) => {
             </li>
           ))}
         </ul>
-      </div>
+      </div> */}
     </footer>
   );
 });
