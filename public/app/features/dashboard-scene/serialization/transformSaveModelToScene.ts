@@ -28,9 +28,11 @@ import {
   UserActionEvent,
   GroupByVariable,
   AdHocFiltersVariable,
+  sceneGraph,
 } from '@grafana/scenes';
 import { DashboardModel, PanelModel } from 'app/features/dashboard/state';
-import { DashboardDTO } from 'app/types';
+import { ScopesFacade } from 'app/features/scopes';
+import { DashboardDTO, DashboardDataDTO } from 'app/types';
 
 import { AlertStatesDataLayer } from '../scene/AlertStatesDataLayer';
 import { DashboardAnnotationsDataLayer } from '../scene/DashboardAnnotationsDataLayer';
@@ -74,7 +76,7 @@ export function transformSaveModelToScene(rsp: DashboardDTO): DashboardScene {
   // Just to have migrations run
   const oldModel = new DashboardModel(rsp.dashboard, rsp.meta);
 
-  const scene = createDashboardSceneFromDashboardModel(oldModel);
+  const scene = createDashboardSceneFromDashboardModel(oldModel, rsp.dashboard);
   // TODO: refactor createDashboardSceneFromDashboardModel to work on Dashboard schema model
   scene.setInitialSaveModel(rsp.dashboard);
 
@@ -190,7 +192,7 @@ function createRowFromPanelModel(row: PanelModel, content: SceneGridItemLike[]):
   });
 }
 
-export function createDashboardSceneFromDashboardModel(oldModel: DashboardModel) {
+export function createDashboardSceneFromDashboardModel(oldModel: DashboardModel, dto: DashboardDataDTO) {
   let variables: SceneVariableSet | undefined;
   let annotationLayers: SceneDataLayerProvider[] = [];
   let alertStatesLayer: AlertStatesDataLayer | undefined;
@@ -249,6 +251,7 @@ export function createDashboardSceneFromDashboardModel(oldModel: DashboardModel)
   const dashboardScene = new DashboardScene({
     description: oldModel.description,
     editable: oldModel.editable,
+    preload: dto.preload ?? false,
     id: oldModel.id,
     isDirty: false,
     links: oldModel.links || [],
@@ -258,7 +261,7 @@ export function createDashboardSceneFromDashboardModel(oldModel: DashboardModel)
     uid: oldModel.uid,
     version: oldModel.version,
     body: new SceneGridLayout({
-      isLazy: true,
+      isLazy: dto.preload ? false : true,
       children: createSceneObjectsForPanels(oldModel.panels),
       $behaviors: [trackIfEmpty],
     }),
@@ -280,6 +283,9 @@ export function createDashboardSceneFromDashboardModel(oldModel: DashboardModel)
       registerPanelInteractionsReporter,
       new behaviors.LiveNowTimer({ enabled: oldModel.liveNow }),
       preserveDashboardSceneStateInLocalStorage,
+      new ScopesFacade({
+        handler: (facade) => sceneGraph.getTimeRange(facade).onRefresh(),
+      }),
     ],
     $data: new DashboardDataLayerSet({ annotationLayers, alertStatesLayer }),
     controls: new DashboardControls({
@@ -519,9 +525,6 @@ function registerPanelInteractionsReporter(scene: DashboardScene) {
         break;
       case 'panel-cancel-query-clicked':
         DashboardInteractions.panelCancelQueryClicked();
-        break;
-      case 'panel-menu-shown':
-        DashboardInteractions.panelMenuShown();
         break;
     }
   });

@@ -29,7 +29,6 @@ export interface FeatureToggles {
   featureHighlights?: boolean;
   storage?: boolean;
   correlations?: boolean;
-  datasourceQueryMultiStatus?: boolean;
   autoMigrateOldPanels?: boolean;
   autoMigrateGraphPanel?: boolean;
   autoMigrateTablePanel?: boolean;
@@ -39,7 +38,6 @@ export interface FeatureToggles {
   autoMigrateXYChartPanel?: boolean;
   disableAngular?: boolean;
   canvasPanelNesting?: boolean;
-  scenes?: boolean;
   disableSecretsCompatibility?: boolean;
   logRequestsInstrumentedAsUnknown?: boolean;
   topnav?: boolean;
@@ -61,6 +59,7 @@ export interface FeatureToggles {
   influxdbBackendMigration?: boolean;
   influxqlStreamingParser?: boolean;
   influxdbRunQueriesInParallel?: boolean;
+  prometheusRunQueriesInParallel?: boolean;
   prometheusDataplane?: boolean;
   lokiMetricDataplane?: boolean;
   lokiLogsDataplane?: boolean;
@@ -78,6 +77,7 @@ export interface FeatureToggles {
   lokiPredefinedOperations?: boolean;
   pluginsFrontendSandbox?: boolean;
   frontendSandboxMonitorOnly?: boolean;
+  pluginsDetailsRightPanel?: boolean;
   sqlDatasourceDatabaseSelection?: boolean;
   recordedQueriesMulti?: boolean;
   vizAndWidgetSplit?: boolean;
@@ -124,7 +124,6 @@ export interface FeatureToggles {
   recoveryThreshold?: boolean;
   lokiStructuredMetadata?: boolean;
   teamHttpHeaders?: boolean;
-  awsDatasourcesNewFormStyling?: boolean;
   cachingOptimizeSerializationMemoryUsage?: boolean;
   panelTitleSearchInV1?: boolean;
   managedPluginsInstall?: boolean;
@@ -144,7 +143,6 @@ export interface FeatureToggles {
   ssoSettingsApi?: boolean;
   canvasPanelPanZoom?: boolean;
   logsInfiniteScrolling?: boolean;
-  flameGraphItemCollapsing?: boolean;
   exploreMetrics?: boolean;
   alertingSimplifiedRouting?: boolean;
   logRowsPopoverMenu?: boolean;
@@ -199,4 +197,11 @@ export interface FeatureToggles {
   passScopeToDashboardApi?: boolean;
   alertingApiServer?: boolean;
   dashboardRestoreUI?: boolean;
+  cloudWatchRoundUpEndTime?: boolean;
+  bodyScrolling?: boolean;
+  cloudwatchMetricInsightsCrossAccount?: boolean;
+  prometheusAzureOverrideAudience?: boolean;
+  backgroundPluginInstaller?: boolean;
+  dataplaneAggregator?: boolean;
+  adhocFilterOneOf?: boolean;
 }

@@ -12,6 +12,7 @@ import (
 	"golang.org/x/sync/errgroup"
 
 	"github.com/grafana/grafana-plugin-sdk-go/data"
+
 	"github.com/grafana/grafana/pkg/infra/log"
 	"github.com/grafana/grafana/pkg/infra/tracing"
 	"github.com/grafana/grafana/pkg/services/featuremgmt"
@@ -48,7 +49,7 @@ type RulesStore interface {
 }
 
 type RecordingWriter interface {
-	Write(ctx context.Context, name string, t time.Time, frames data.Frames, extraLabels map[string]string) error
+	Write(ctx context.Context, name string, t time.Time, frames data.Frames, orgID int64, extraLabels map[string]string) error
 }
 
 type schedule struct {
@@ -86,6 +87,10 @@ type schedule struct {
 	featureToggles       featuremgmt.FeatureToggles
 
 	metrics *metrics.Scheduler
+	// lastUpdatedMetricsForOrgsAndGroups contains AlertRuleGroupKeyWithFolderFullpaths that
+	// were passed to updateRulesMetrics in the current tick. This is used to
+	// delete metrics for the rules/groups that are not longer present.
+	lastUpdatedMetricsForOrgsAndGroups map[int64]map[ngmodels.AlertRuleGroupKeyWithFolderFullpath]struct{} // orgID -> set of AlertRuleGroupKeyWithFolderFullpath
 
 	alertsSender    AlertsSender
 	minRuleInterval time.Duration
@@ -129,24 +134,25 @@ func NewScheduler(cfg SchedulerCfg, stateManager *state.Manager) *schedule {
 	}
 
 	sch := schedule{
-		registry:              newRuleRegistry(),
-		maxAttempts:           cfg.MaxAttempts,
-		clock:                 cfg.C,
-		baseInterval:          cfg.BaseInterval,
-		log:                   cfg.Log,
-		evaluatorFactory:      cfg.EvaluatorFactory,
-		ruleStore:             cfg.RuleStore,
-		metrics:               cfg.Metrics,
-		appURL:                cfg.AppURL,
-		disableGrafanaFolder:  cfg.DisableGrafanaFolder,
-		jitterEvaluations:     cfg.JitterEvaluations,
-		featureToggles:        cfg.FeatureToggles,
-		stateManager:          stateManager,
-		minRuleInterval:       cfg.MinRuleInterval,
-		schedulableAlertRules: alertRulesRegistry{rules: make(map[ngmodels.AlertRuleKey]*ngmodels.AlertRule)},
-		alertsSender:          cfg.AlertSender,
-		tracer:                cfg.Tracer,
-		recordingWriter:       cfg.RecordingWriter,
+		registry:                           newRuleRegistry(),
+		maxAttempts:                        cfg.MaxAttempts,
+		clock:                              cfg.C,
+		baseInterval:                       cfg.BaseInterval,
+		log:                                cfg.Log,
+		evaluatorFactory:                   cfg.EvaluatorFactory,
+		ruleStore:                          cfg.RuleStore,
+		metrics:                            cfg.Metrics,
+		lastUpdatedMetricsForOrgsAndGroups: make(map[int64]map[ngmodels.AlertRuleGroupKeyWithFolderFullpath]struct{}),
+		appURL:                             cfg.AppURL,
+		disableGrafanaFolder:               cfg.DisableGrafanaFolder,
+		jitterEvaluations:                  cfg.JitterEvaluations,
+		featureToggles:                     cfg.FeatureToggles,
+		stateManager:                       stateManager,
+		minRuleInterval:                    cfg.MinRuleInterval,
+		schedulableAlertRules:              alertRulesRegistry{rules: make(map[ngmodels.AlertRuleKey]*ngmodels.AlertRule)},
+		alertsSender:                       cfg.AlertSender,
+		tracer:                             cfg.Tracer,
+		recordingWriter:                    cfg.RecordingWriter,
 	}
 
 	return &sch
@@ -249,6 +255,7 @@ func (sch *schedule) processTick(ctx context.Context, dispatcherGroup *errgroup.
 
 	readyToRun := make([]readyToRunItem, 0)
 	updatedRules := make([]ngmodels.AlertRuleKeyWithVersion, 0, len(updated)) // this is needed for tests only
+	restartedRules := make([]Rule, 0)
 	missingFolder := make(map[string][]string)
 	ruleFactory := newRuleFactory(
 		sch.appURL,
@@ -280,9 +287,17 @@ func (sch *schedule) processTick(ctx context.Context, dispatcherGroup *errgroup.
 
 		invalidInterval := item.IntervalSeconds%int64(sch.baseInterval.Seconds()) != 0
 
+		if item.Type() != ruleRoutine.Type() {
+			// Restart rules that need it. For now we just replace them, we'll shut them down at the end of the tick.
+			logger.Debug("Rule restarted because type changed", "old", ruleRoutine.Type(), "new", item.Type())
+			restartedRules = append(restartedRules, ruleRoutine)
+			sch.registry.del(key)
+			ruleRoutine, newRoutine = sch.registry.getOrCreate(ctx, item, ruleFactory)
+		}
+
 		if newRoutine && !invalidInterval {
 			dispatcherGroup.Go(func() error {
-				return ruleRoutine.Run(key)
+				return ruleRoutine.Run()
 			})
 		}
 
@@ -308,7 +323,7 @@ func (sch *schedule) processTick(ctx context.Context, dispatcherGroup *errgroup.
 		}
 
 		if isReadyToRun {
-			logger.Debug("Rule is ready to run on the current tick", "tick", tickNum, "frequency", itemFrequency, "offset", offset)
+			logger.Debug("Rule is ready to run on the current tick", "tick", tick, "frequency", itemFrequency, "offset", offset)
 			readyToRun = append(readyToRun, readyToRunItem{ruleRoutine: ruleRoutine, Evaluation: Evaluation{
 				scheduledAt: tick,
 				rule:        item,
@@ -357,11 +372,16 @@ func (sch *schedule) processTick(ctx context.Context, dispatcherGroup *errgroup.
 				return
 			}
 			if dropped != nil {
-				sch.log.Warn("Tick dropped because alert rule evaluation is too slow", append(key.LogContext(), "time", tick)...)
+				sch.log.Warn("Tick dropped because alert rule evaluation is too slow", append(key.LogContext(), "time", tick, "droppedTick", dropped.scheduledAt)...)
 				orgID := fmt.Sprint(key.OrgID)
 				sch.metrics.EvaluationMissed.WithLabelValues(orgID, item.rule.Title).Inc()
 			}
 		})
+	}
+
+	// Stop old routines for rules that got restarted.
+	for _, oldRoutine := range restartedRules {
+		oldRoutine.Stop(errRuleRestarted)
 	}
 
 	// unregister and stop routines of the deleted alert rules

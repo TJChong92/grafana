@@ -294,7 +294,8 @@ const getStyles = (theme: GrafanaTheme2) => {
     // but we don't want the backdrop styling to apply over the top bar as it looks weird
     // instead have a child pseudo element to apply the backdrop styling below the top bar
     mask: css({
-      backgroundColor: 'transparent',
+      // The !important here is to override the default .rc-drawer-mask styles
+      backgroundColor: 'transparent !important',
       position: 'fixed',
 
       '&:before': {
@@ -379,7 +380,7 @@ function getWrapperStyles(theme: GrafanaTheme2, size: 'sm' | 'md' | 'lg') {
 
     [theme.breakpoints.down('md')]: {
       width: `calc(100% - ${theme.spacing(2)}) !important`,
-      minWidth: 0,
+      minWidth: '0 !important',
     },
   });
 }

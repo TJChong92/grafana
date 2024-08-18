@@ -14,9 +14,9 @@ import {
   removeDashboardToFetchFromLocalStorage,
 } from 'app/features/dashboard/state/initDashboard';
 import { trackDashboardSceneLoaded } from 'app/features/dashboard/utils/tracking';
+import { getSelectedScopesNames } from 'app/features/scopes';
 import { DashboardDTO, DashboardRoutes } from 'app/types';
 
-import { getScopesFromUrl } from '../../dashboard/utils/getScopesFromUrl';
 import { PanelEditor } from '../panel-edit/PanelEditor';
 import { DashboardScene } from '../scene/DashboardScene';
 import { buildNewDashboardSaveModel } from '../serialization/buildNewDashboardSaveModel';
@@ -299,15 +299,13 @@ export class DashboardScenePageStateManager extends StateManagerBase<DashboardSc
   }
 
   public getCacheKey(cacheKey: string): string {
-    const scopesSearchParams = getScopesFromUrl();
+    const scopesCacheKey = getSelectedScopesNames().sort().join('__scp__');
 
-    if (!scopesSearchParams?.has('scopes')) {
+    if (!scopesCacheKey) {
       return cacheKey;
     }
 
-    scopesSearchParams.sort();
-
-    return `${cacheKey}__scp__${scopesSearchParams.toString()}`;
+    return `${cacheKey}__scp__${scopesCacheKey}`;
   }
 }
 
@@ -322,40 +320,57 @@ export function getDashboardScenePageStateManager(): DashboardScenePageStateMana
 }
 
 function getErrorScene(msg: string) {
-  return createDashboardSceneFromDashboardModel(
-    new DashboardModel(
-      {
-        ...defaultDashboard,
-        title: msg,
-        panels: [
+  const dto: DashboardDTO = {
+    dashboard: {
+      ...defaultDashboard,
+      uid: 'error-dash',
+      title: msg,
+      annotations: {
+        list: [
           {
-            fieldConfig: {
-              defaults: {},
-              overrides: [],
+            builtIn: 1,
+            datasource: {
+              type: 'grafana',
+              uid: '-- Grafana --',
             },
-            gridPos: {
-              h: 6,
-              w: 12,
-              x: 7,
-              y: 0,
-            },
-            id: 1,
-            options: {
-              code: {
-                language: 'plaintext',
-                showLineNumbers: false,
-                showMiniMap: false,
-              },
-              content: `<br/><br/><center><h1>${msg}</h1></center>`,
-              mode: 'html',
-            },
-            title: '',
-            transparent: true,
-            type: 'text',
+            enable: false,
+            hide: true,
+            iconColor: 'rgba(0, 211, 255, 1)',
+            name: 'Annotations & Alerts',
+            type: 'dashboard',
           },
         ],
       },
-      { canSave: false, canEdit: false }
-    )
-  );
+
+      panels: [
+        {
+          fieldConfig: {
+            defaults: {},
+            overrides: [],
+          },
+          gridPos: {
+            h: 6,
+            w: 12,
+            x: 7,
+            y: 0,
+          },
+          id: 1,
+          options: {
+            code: {
+              language: 'plaintext',
+              showLineNumbers: false,
+              showMiniMap: false,
+            },
+            content: `<br/><br/><center><h1>${msg}</h1></center>`,
+            mode: 'html',
+          },
+          title: '',
+          transparent: true,
+          type: 'text',
+        },
+      ],
+    },
+    meta: { canSave: false, canEdit: false },
+  };
+  return createDashboardSceneFromDashboardModel(new DashboardModel(dto.dashboard, dto.meta), dto.dashboard);
 }

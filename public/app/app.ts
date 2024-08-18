@@ -39,6 +39,7 @@ import {
   setPluginExtensionsHook,
   setPluginComponentHook,
   setCurrentUser,
+  setChromeHeaderHeightHook,
 } from '@grafana/runtime';
 import { setPanelDataErrorView } from '@grafana/runtime/src/components/PanelDataErrorView';
 import { setPanelRenderer } from '@grafana/runtime/src/components/PanelRenderer';
@@ -54,7 +55,7 @@ import appEvents from './core/app_events';
 import { AppChromeService } from './core/components/AppChrome/AppChromeService';
 import { getAllOptionEditors, getAllStandardFieldConfigs } from './core/components/OptionsUI/registry';
 import { PluginPage } from './core/components/Page/PluginPage';
-import { GrafanaContextType, useReturnToPreviousInternal } from './core/context/GrafanaContext';
+import { GrafanaContextType, useChromeHeaderHeight, useReturnToPreviousInternal } from './core/context/GrafanaContext';
 import { initIconCache } from './core/icons/iconBundle';
 import { initializeI18n } from './core/internationalization';
 import { setMonacoEnv } from './core/monacoEnv';
@@ -91,6 +92,7 @@ import { preloadPlugins } from './features/plugins/pluginPreloader';
 import { QueryRunner } from './features/query/state/QueryRunner';
 import { runRequest } from './features/query/state/runRequest';
 import { initWindowRuntime } from './features/runtime/init';
+import { initializeScopes } from './features/scopes';
 import { cleanupOldExpandedFolders } from './features/search/utils';
 import { variableAdapters } from './features/variables/adapters';
 import { createAdHocVariableAdapter } from './features/variables/adhoc/adapter';
@@ -255,6 +257,9 @@ export class GrafanaApp {
       };
 
       setReturnToPreviousHook(useReturnToPreviousInternal);
+      setChromeHeaderHeightHook(useChromeHeaderHeight);
+
+      initializeScopes();
 
       const root = createRoot(document.getElementById('reactRoot')!);
       root.render(
