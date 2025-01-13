@@ -10,17 +10,17 @@
         <ServiceInstall Id="ServiceInstall"
           Account="LocalSystem"
           ErrorControl="normal"
-          Name="Grafana"
+          Name="S-Dash"
           Start="auto"
           Type="ownProcess"
           Vital="yes"
           Description="Grafana by Grafana Labs"
-          DisplayName="Grafana">
+          DisplayName="S-Dash">
           <ServiceConfig OnInstall="yes" OnReinstall="yes" DelayedAutoStart="no" />
         </ServiceInstall>
 
         <ServiceControl Id="ControlService"
-          Name="Grafana"
+          Name="S-Dash"
           Wait="yes"
           Start="install"
           Stop="both"

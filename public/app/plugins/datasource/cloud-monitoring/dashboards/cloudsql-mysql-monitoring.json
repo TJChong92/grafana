@@ -1,7 +1,7 @@
 {
   "__inputs": [],
   "__requires": [
-    { "type": "grafana", "id": "grafana", "name": "Grafana", "version": "7.3.0-pre" },
+    { "type": "grafana", "id": "grafana", "name": "S-Dash", "version": "7.3.0-pre" },
     { "type": "panel", "id": "graph", "name": "Graph", "version": "" },
     { "type": "datasource", "id": "stackdriver", "name": "Google Cloud Monitoring", "version": "1.0.0" }
   ],

@@ -316,7 +316,7 @@ func GetAvailableNotifiers() []*NotifierPlugin {
 					Description:  "Component of the source machine that is responsible for the event, for example mysql or eth0",
 					Element:      ElementTypeInput,
 					InputType:    InputTypeText,
-					Placeholder:  "Grafana",
+					Placeholder:  "S-Dash",
 					PropertyName: "component",
 				},
 				{ // New in 8.0.
@@ -347,7 +347,7 @@ func GetAvailableNotifiers() []*NotifierPlugin {
 					Description:  "The name of the monitoring client that is triggering this event. You can use templates",
 					Element:      ElementTypeInput,
 					InputType:    InputTypeText,
-					Placeholder:  "Grafana",
+					Placeholder:  "S-Dash",
 					PropertyName: "client",
 				},
 				{ // New in 9.4.
@@ -959,7 +959,7 @@ func GetAvailableNotifiers() []*NotifierPlugin {
 				},
 				{ // New in 9.3.
 					Label:        "Message",
-					Description:  "Custom message. You can use template variables.",
+					Description:  "Templated message to be used in the payload's \"message\" field.",
 					Element:      ElementTypeTextArea,
 					PropertyName: "message",
 					Placeholder:  alertingTemplates.DefaultMessageEmbed,

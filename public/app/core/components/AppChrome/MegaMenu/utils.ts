@@ -131,7 +131,7 @@ export function getEditionAndUpdateLinks(): NavModelItem[] {
       id: 'updateVersion',
       text: `New version available!`,
       icon: 'download-alt',
-      url: 'https://grafana.com/grafana/download?utm_source=grafana_footer',
+      url: 'https://syswelliot.com/?utm_source=sdash_footer',
     });
   }
 
@@ -158,26 +158,21 @@ export function findByUrl(nodes: NavModelItem[], url: string): NavModelItem | nu
  * @param isDocked whether mega menu is docked
  */
 export function useMegaMenuFocusHelper(isOpen: boolean, isDocked: boolean) {
-  const isSingleTopNav = config.featureToggles.singleTopNav;
   // manage focus when opening/closing
   useEffect(() => {
-    if (isSingleTopNav) {
-      if (isOpen) {
-        document.getElementById(MEGA_MENU_HEADER_TOGGLE_ID)?.focus();
-      } else {
-        document.getElementById(MEGA_MENU_TOGGLE_ID)?.focus();
-      }
+    if (isOpen) {
+      document.getElementById(MEGA_MENU_HEADER_TOGGLE_ID)?.focus();
+    } else {
+      document.getElementById(MEGA_MENU_TOGGLE_ID)?.focus();
     }
-  }, [isOpen, isSingleTopNav]);
+  }, [isOpen]);
 
   // manage focus when docking/undocking
   useEffect(() => {
-    if (isSingleTopNav) {
-      if (isDocked) {
-        document.getElementById(DOCK_MENU_BUTTON_ID)?.focus();
-      } else {
-        document.getElementById(MEGA_MENU_TOGGLE_ID)?.focus();
-      }
+    if (isDocked) {
+      document.getElementById(DOCK_MENU_BUTTON_ID)?.focus();
+    } else {
+      document.getElementById(MEGA_MENU_TOGGLE_ID)?.focus();
     }
-  }, [isDocked, isSingleTopNav]);
+  }, [isDocked]);
 }

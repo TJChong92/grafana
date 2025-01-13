@@ -22,7 +22,7 @@ export function EntityNotFound({ entity = 'Page' }: Props) {
         <Trans i18nKey="entity-not-found.description">
           We&apos;re looking but can&apos;t seem to find this {{ lowerCaseEntity }}. Try returning{' '}
           <TextLink href="/">home</TextLink> or seeking help on the{' '}
-          <TextLink href="https://community.grafana.com" external>
+          <TextLink href="https://community.syswelliot.com" external>
             community site.
           </TextLink>
         </Trans>

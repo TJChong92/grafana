@@ -135,7 +135,7 @@ func TestIntegrationTestReceivers(t *testing.T) {
 			},
 			"labels": {
 				"alertname": "TestAlert",
-				"instance": "Grafana"
+				"instance": "S-Dash"
 			}
 		},
 		"receivers": [{
@@ -218,7 +218,7 @@ func TestIntegrationTestReceivers(t *testing.T) {
 			},
 			"labels": {
 				"alertname": "TestAlert",
-				"instance": "Grafana"
+				"instance": "S-Dash"
 			}
 		},
 		"receivers": [{
@@ -319,7 +319,7 @@ func TestIntegrationTestReceivers(t *testing.T) {
 			},
 			"labels": {
 				"alertname": "TestAlert",
-				"instance": "Grafana"
+				"instance": "S-Dash"
 			}
 		},
 		"receivers": [{
@@ -396,7 +396,7 @@ func TestIntegrationTestReceivers(t *testing.T) {
 				},
 				"labels": {
 					"alertname": "TestAlert",
-					"instance": "Grafana"
+					"instance": "S-Dash"
 				}
 			},
 			"receivers": [{
@@ -484,7 +484,7 @@ func TestIntegrationTestReceivers(t *testing.T) {
 			},
 			"labels": {
 				"alertname": "TestAlert",
-				"instance": "Grafana"
+				"instance": "S-Dash"
 			}
 		},
 		"receivers": [{
@@ -585,7 +585,7 @@ func TestIntegrationTestReceivers(t *testing.T) {
 			},
 			"labels": {
 				"alertname": "TestAlert",
-				"instance": "Grafana"
+				"instance": "S-Dash"
 			}
 		},
 		"receivers": [{
@@ -691,7 +691,7 @@ func TestIntegrationTestReceiversAlertCustomization(t *testing.T) {
 			},
 			"labels": {
 				"alertname": "TestAlert",
-				"instance": "Grafana",
+				"instance": "S-Dash",
 				"label1": "value1"
 			}
 		},
@@ -780,7 +780,7 @@ func TestIntegrationTestReceiversAlertCustomization(t *testing.T) {
 			},
 			"labels": {
 				"alertname": "TestAlert",
-				"instance": "Grafana"
+				"instance": "S-Dash"
 			}
 		},
 		"receivers": [{
@@ -867,7 +867,7 @@ func TestIntegrationTestReceiversAlertCustomization(t *testing.T) {
 			},
 			"labels": {
 				"alertname": "This is a custom label",
-				"instance": "Grafana"
+				"instance": "S-Dash"
 			}
 		},
 		"receivers": [{
@@ -2528,8 +2528,8 @@ var expNonEmailNotifications = map[string][]string{
 			  "title_link": "http://localhost:3000/alerting/grafana/UID_SlackAlert1/view",
 			  "text": "Integration Test ",
 			  "fallback": "Integration Test [FIRING:1] SlackAlert1 (default)",
-			  "footer": "Grafana v",
-			  "footer_icon": "https://grafana.com/static/assets/img/fav32.png",
+			  "footer": "S-dash v",
+			  "footer_icon": "https://grafana.com/static/assets/img/sdash_fav32.png",
 			  "color": "#D63232",
 			  "ts": %s,
               "mrkdwn_in": ["pretext"],
@@ -2548,8 +2548,8 @@ var expNonEmailNotifications = map[string][]string{
 			  "title_link": "http://localhost:3000/alerting/grafana/UID_SlackAlert2/view",
 			  "text": "**Firing**\n\nValue: A=1\nLabels:\n - alertname = SlackAlert2\n - grafana_folder = default\nAnnotations:\nSource: http://localhost:3000/alerting/grafana/UID_SlackAlert2/view?orgId=1\nSilence: http://localhost:3000/alerting/silence/new?alertmanager=grafana&matcher=alertname%%3DSlackAlert2&matcher=grafana_folder%%3Ddefault&orgId=1\n",
 			  "fallback": "[FIRING:1] SlackAlert2 (default)",
-			  "footer": "Grafana v",
-			  "footer_icon": "https://grafana.com/static/assets/img/fav32.png",
+			  "footer": "S-dash v",
+			  "footer_icon": "https://grafana.com/static/assets/img/sdash_fav32.png",
 			  "color": "#D63232",
 			  "ts": %s,
               "mrkdwn_in": ["pretext"],
@@ -2577,7 +2577,7 @@ var expNonEmailNotifications = map[string][]string{
 			  "resolved": ""
 			}
 		  },
-		  "client": "Grafana",
+		  "client": "S-Dash",
 		  "client_url": "http://localhost:3000/",
 		  "links": [
 			{
@@ -2687,15 +2687,15 @@ var expNonEmailNotifications = map[string][]string{
 			{
 			  "color": 14037554,
 			  "footer": {
-				"icon_url": "https://grafana.com/static/assets/img/fav32.png",
-				"text": "Grafana v"
+				"icon_url": "https://grafana.com/static/assets/img/sdash_fav32.png",
+				"text": "S-dash v"
 			  },
 			  "title": "[FIRING:1] DiscordAlert (default)",
 			  "type": "rich",
 			  "url": "http://localhost:3000/alerting/list"
 			}
 		  ],
-		  "username": "Grafana"
+		  "username": "S-Dash"
 		}`,
 	},
 	"sensugo_recv/sensugo_test": {
@@ -2777,7 +2777,7 @@ var expNonEmailNotifications = map[string][]string{
 			{
 			  "value": {
 				"alert_state": "alerting",
-				"client": "Grafana",
+				"client": "S-Dash",
 				"client_url": "http://localhost:3000/alerting/list",
 				"description": "[FIRING:1] KafkaAlert (default)",
 				"details": "**Firing**\n\nValue: A=1\nLabels:\n - alertname = KafkaAlert\n - grafana_folder = default\nAnnotations:\nSource: http://localhost:3000/alerting/grafana/UID_KafkaAlert/view?orgId=1\nSilence: http://localhost:3000/alerting/silence/new?alertmanager=grafana&matcher=alertname%3DKafkaAlert&matcher=grafana_folder%3Ddefault&orgId=1\n",
@@ -2799,7 +2799,7 @@ var expNonEmailNotifications = map[string][]string{
 		  "entity_display_name": "[FIRING:1] VictorOpsAlert (default)",
 		  "entity_id": "633ae988fa7074bcb51f3d1c5fef2ba1c5c4ccb45b3ecbf681f7d507b078b1ae",
 		  "message_type": "CRITICAL",
-		  "monitoring_tool": "Grafana v",
+		  "monitoring_tool": "S-dash v",
 		  "state_message": "**Firing**\n\nValue: A=1\nLabels:\n - alertname = VictorOpsAlert\n - grafana_folder = default\nAnnotations:\nSource: http://localhost:3000/alerting/grafana/UID_VictorOpsAlert/view?orgId=1\nSilence: http://localhost:3000/alerting/silence/new?alertmanager=grafana&matcher=alertname%%3DVictorOpsAlert&matcher=grafana_folder%%3Ddefault&orgId=1\n",
 		  "timestamp": %s
 		}`,
@@ -2812,7 +2812,7 @@ var expNonEmailNotifications = map[string][]string{
 			"url": "http://localhost:3000/alerting/list"
 		  },
 		  "message": "[FIRING:1] OpsGenieAlert (default)",
-		  "source": "Grafana",
+		  "source": "S-Dash",
 		  "tags": ["alertname:OpsGenieAlert","grafana_folder:default"]
 		}`,
 	},

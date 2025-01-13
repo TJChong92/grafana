@@ -4,7 +4,7 @@
     {
       "type": "grafana",
       "id": "grafana",
-      "name": "Grafana",
+      "name": "S-Dash",
       "version": "7.3.0-pre"
     },
     {

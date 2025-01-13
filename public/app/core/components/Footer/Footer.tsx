@@ -21,21 +21,21 @@ export let getFooterLinks = (): FooterLink[] => {
       id: 'documentation',
       text: t('nav.help/documentation', 'Documentation'),
       icon: 'document-info',
-      url: 'https://grafana.com/docs/grafana/latest/?utm_source=grafana_footer',
+      url: 'https://syswelliot.com/?utm_source=sdash_footer',
     },
     {
       target: '_blank',
       id: 'support',
       text: t('nav.help/support', 'Support'),
       icon: 'question-circle',
-      url: 'https://grafana.com/products/enterprise/?utm_source=grafana_footer',
+      url: 'https://syswelliot.com/?utm_source=sdash_footer',
     },
     {
       target: '_blank',
       id: 'community',
       text: t('nav.help/community', 'Community'),
       icon: 'comments-alt',
-      url: 'https://community.grafana.com/?utm_source=grafana_footer',
+      url: 'https://syswelliot.com/?utm_source=sdash_footer',
     },
   ];
 };
@@ -73,7 +73,7 @@ export function getVersionLinks(hideEdition?: boolean): FooterLink[] {
     target: '_blank',
     id: 'version',
     text: buildInfo.versionString,
-    url: hasReleaseNotes ? `https://github.com/grafana/grafana/blob/main/CHANGELOG.md` : undefined,
+    url: hasReleaseNotes ? `https://github.com/TJChong92/grafana/blob/main/README.md` : undefined,
   });
 
   if (buildInfo.hasUpdate) {
@@ -82,7 +82,7 @@ export function getVersionLinks(hideEdition?: boolean): FooterLink[] {
       id: 'updateVersion',
       text: `New version available!`,
       icon: 'download-alt',
-      url: 'https://grafana.com/grafana/download?utm_source=grafana_footer',
+      url: 'https://github.com/TJChong92/grafana',
     });
   }
 
@@ -105,7 +105,7 @@ export const Footer = memo(({ customLinks, hideEdition }: Props) => {
 
   return (
     <footer className={styles.footer}>
-      <div className="text-center">
+      {/* <div className="text-center">
         <ul className={styles.list}>
           {links.map((link, index) => (
             <li className={styles.listItem} key={index}>
@@ -113,7 +113,7 @@ export const Footer = memo(({ customLinks, hideEdition }: Props) => {
             </li>
           ))}
         </ul>
-      </div>
+      </div> */}
     </footer>
   );
 });

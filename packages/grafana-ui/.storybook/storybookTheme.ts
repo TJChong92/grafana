@@ -1,7 +1,6 @@
 import { GrafanaTheme2, createTheme } from '@grafana/data';
 //@ts-ignore
 import { create } from '@storybook/theming';
-import '../../../public/app/core/icons/iconBundle';
 
 const createStorybookTheme = (theme: GrafanaTheme2) => {
   return create({
@@ -34,9 +33,9 @@ const createStorybookTheme = (theme: GrafanaTheme2) => {
     inputTextColor: theme.components.input.text,
     inputBorderRadius: parseInt(theme.shape.borderRadius(1), 10),
 
-    brandTitle: 'Grafana UI',
+    brandtitle: 'S-dash UI',
     brandUrl: './',
-    brandImage: `public/img/grafana_text_logo-${theme.colors.mode}.svg`,
+    brandImage: `public/img/sdash_text_logo-${theme.colors.mode}.svg`,
   });
 };
 
